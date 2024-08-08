@@ -3,22 +3,29 @@
  * @param {string} t
  * @return {boolean}
  */
-var isAnagram = function(s, t) {
+var isAnagram = function (s, t) {
+    // base case
     if (s.length !== t.length) {
         return false;
     }
 
-    var freq = new Array(26).fill(0);
-    for (var i = 0; i < s.length; i++) {
-        freq[s.charCodeAt(i) - 'a'.charCodeAt(0)]++;
-        freq[t.charCodeAt(i) - 'a'.charCodeAt(0)]--;
+    const map = new Map();
+
+    for (const i of s) {
+        map.set(i, 1 + (map.get(i) || 0));
     }
 
-    for (var i = 0; i < freq.length; i++) {
-        if (freq[i] !== 0) {
+    for (const i of t) {
+        if (!map.has(i)) {
             return false;
+        }
+
+        map.set(i, map.get(i) - 1);
+
+        if (map.get(i) === 0) {
+            map.delete(i)
         }
     }
 
-    return true;
+    return map.size === 0;
 };
