@@ -89,7 +89,8 @@ class MyLinkedList {
     }
 
     deleteAtIndex(index: number): void {
-        if (index < 0 || index >= this.length) {
+        if (index >= this.length || index < 0) {
+            // throw new Error("Out of range")
             return;
         }
         
@@ -99,28 +100,23 @@ class MyLinkedList {
                 if (this.head) {
                     this.head.prev = null;
                 } else {
-                    this.tail = null; // if the list is now empty
+                    this.tail = null;
                 }
             }
-        } else {
-            let cur = this.head;
-            for (let i = 0; cur && i < index; i++) {
-                cur = cur.next;
-            }
-            
-            if (cur) {
-                if (cur.prev) {
-                    cur.prev.next = cur.next;
-                }
-                if (cur.next) {
-                    cur.next.prev = cur.prev;
-                }
-                if (cur === this.tail) {
-                    this.tail = cur.prev;
-                }
-            }
+            return;
         }
-        
+
+  
+        let cur = this.head;
+        for (let i = 0; cur && i < index; i++) {
+            cur = cur.next;
+        }
+
+        if (!cur) return;
+        if (cur.prev) cur.prev.next = cur.next;
+        if (cur.next) cur.next.prev = cur.prev;
+        if (cur === this.tail) this.tail = cur.prev;
+
         this.length--;
     }
 }
