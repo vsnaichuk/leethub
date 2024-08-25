@@ -5,7 +5,7 @@ function topKFrequent(nums: number[], k: number): number[] {
         map.set(n, map.has(n) ? map.get(n) + 1 : 1)
     }
     
-    const freq = new Array(nums.length + 1).fill(0).map(() => []);
+    const freq = Array.from({ length: nums.length + 1 }, () => []);
     const res: number[] = [];
     
     for (const [n, count] of map.entries()) {
