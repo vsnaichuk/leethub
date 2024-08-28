@@ -1,12 +1,3 @@
-function reverseStr(s: string) {
-    let res = "";
-    for (let i = s.length - 1; i >= 0; i--) {
-        res+=s[i]
-    }
-    return res;
-}
-
-
 function isalnum(c: string) {
     const cc = c.charCodeAt(0);
     return (cc >= 'A'.charCodeAt(0) && cc <= 'Z'.charCodeAt(0))||
@@ -15,11 +6,17 @@ function isalnum(c: string) {
 }
 
 function isPalindrome(s: string): boolean {
-    let newStr = "";
-    for (const c of s) {
-        if (isalnum(c)) {
-            newStr += c.toLowerCase();
-        }            
+    let l = 0, r = s.length - 1;
+    
+    while (l < r) {
+        while (l < r && !isalnum(s[l])) l++;
+        while (r > l && !isalnum(s[r])) r--;
+        
+        if (s[l].toLowerCase() !== s[r].toLowerCase()) {
+            return false
+        }
+        l++;
+        r--;
     }
-    return newStr === reverseStr(newStr)
+    return true;
 };
