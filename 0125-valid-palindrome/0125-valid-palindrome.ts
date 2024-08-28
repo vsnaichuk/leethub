@@ -6,7 +6,20 @@ function reverseStr(s: string) {
     return res;
 }
 
+
+function isalnum(c: string) {
+    const cc = c.charCodeAt(0);
+    return (cc >= 'A'.charCodeAt(0) && cc <= 'Z'.charCodeAt(0))||
+            (cc >= 'a'.charCodeAt(0) && cc <= 'z'.charCodeAt(0)) || 
+            (cc >= '0'.charCodeAt(0) && cc <= '9'.charCodeAt(0))
+}
+
 function isPalindrome(s: string): boolean {
-    const newStr = s.replace(/[^A-Za-z0-9]/g, '').toLowerCase();
+    let newStr = "";
+    for (const c of s) {
+        if (isalnum(c)) {
+            newStr += c.toLowerCase();
+        }            
+    }
     return newStr === reverseStr(newStr)
 };
