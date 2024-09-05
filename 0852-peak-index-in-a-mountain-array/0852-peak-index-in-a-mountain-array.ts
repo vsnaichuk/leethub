@@ -1,6 +1,4 @@
 function peakIndexInMountainArray(arr: number[]): number {
-    let pivot = false;
-    
     for (let i = 1; i < arr.length - 1; i++) {
         const curr = arr[i];
         const prev = arr[i-1]
