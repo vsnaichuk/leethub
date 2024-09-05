@@ -1,3 +1,5 @@
+// https://www.youtube.com/watch?v=U2SozAs9RzA
+
 function minEatingSpeed(piles: number[], h: number): number {
     let lo = 1, hi = Math.max(...piles);
     let res = hi;
