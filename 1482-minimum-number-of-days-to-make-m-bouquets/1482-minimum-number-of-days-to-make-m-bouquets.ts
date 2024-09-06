@@ -1,43 +1,37 @@
-function canMakeBouquet(bloomDay: number[], m: number, k: number, day: number) {
-    let total = 0;
-    let flowers = 0;
+function canMakeBq(bloomDay: number[], m: number, k: number, day: number) {
+    const n = bloomDay.length
+    let flowers = 0, bq = 0;
     
-    for (let b of bloomDay) {
-        if (b <= day) {
+    for (let i = 0; i <= n - 1; i++) {
+        if (bloomDay[i] <= day) {
             flowers++
             if (flowers === k) {
-                total++;
-                flowers = 0
+                bq++;
+                flowers = 0;
             }
         } else {
-            flowers = 0
+            flowers = 0;
         }
-        
-        if (total === m) {
+            
+        if (m === bq) {
             return true;
         }
     }
-    
     return false
 }
 
 function minDays(bloomDay: number[], m: number, k: number): number {
-    if (bloomDay.length < (m*k)) {
+    if (m * k > bloomDay.length) 
         return -1;
-    }
     
-    let lo = 0;
-    let hi = Math.max(...bloomDay);
-    
-    do {
-        const mid = Math.floor(lo + (hi - lo) / 2)
-        
-        if (!canMakeBouquet(bloomDay, m, k, mid)) {
-            lo = mid + 1
+    let lo = 1, hi = Math.max(...bloomDay);
+    while (lo <= hi) {
+        const day = Math.floor(lo + (hi - lo) / 2)
+        if (canMakeBq(bloomDay, m, k, day)) {
+            hi = day - 1            
         } else {
-            hi = mid
+            lo = day + 1
         }
-    } while (lo < hi)
-    
+    }
     return lo;
 };
