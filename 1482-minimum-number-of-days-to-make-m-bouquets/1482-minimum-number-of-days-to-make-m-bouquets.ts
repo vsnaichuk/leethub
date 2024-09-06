@@ -25,10 +25,10 @@ function minDays(bloomDay: number[], m: number, k: number): number {
         return -1;
     
     let lo = 1, hi = Math.max(...bloomDay);
-    while (lo <= hi) {
+    while (lo < hi) {
         const day = Math.floor(lo + (hi - lo) / 2)
         if (canMakeBq(bloomDay, m, k, day)) {
-            hi = day - 1            
+            hi = day            
         } else {
             lo = day + 1
         }
