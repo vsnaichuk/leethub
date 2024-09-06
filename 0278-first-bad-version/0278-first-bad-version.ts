@@ -8,16 +8,17 @@
 var solution = function(isBadVersion: any) {
 
     return function(n: number): number {
-        let lo = 1, hi = n;
+        let lo = 1, hi = n, res = -1;
         
-        while (lo < hi) {
+        while (lo <= hi) {
             const ver = Math.floor(lo + (hi - lo) / 2)
             if (isBadVersion(ver)) {
-                hi = ver;
+                hi = ver - 1;
+                res = ver
             } else {
                 lo = ver + 1
             }
         }
-        return hi;
+        return res;
     };
 };
