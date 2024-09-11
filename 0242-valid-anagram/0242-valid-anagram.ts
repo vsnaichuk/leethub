@@ -1,23 +1,22 @@
 function isAnagram(s: string, t: string): boolean {
-    // base
     if (s.length !== t.length) {
-        return false
+        return false;
     }
     
     const map = new Map();
     
-    for (const c of s) {
-        map.set(c, (map.get(c) || 0) + 1);
+    for (const char of s) {
+        map.set(char, (map.get(char) || 0) + 1)
     }
     
-     for (const c of t) {
-         if (map.has(c)) {
-            map.set(c, map.get(c) - 1);
-            if (map.get(c) === 0) map.delete(c)                         
-         } else {
-             return false;
-         }
+    for (const char of t) {
+        if (!map.has(char)) {
+            return false;
+        }
+        map.set(char, map.get(char) - 1)
+        if (map.get(char) === 0) {
+            map.delete(char)
+        }
     }
-    
-    return map.size === 0;
+    return true;
 };
