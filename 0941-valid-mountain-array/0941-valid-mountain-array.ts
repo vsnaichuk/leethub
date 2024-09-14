@@ -1,17 +1,19 @@
 function validMountainArray(arr: number[]): boolean {
-    let pivot = false;
+    const n = arr.length;
     
-    for (let i = 1; i < arr.length - 1; i++) {
+    if (n < 3) 
+        return false;
+    
+    let pivot = false;
+    for (let i = 1; i < n - 1; i++) {
+        const prev = arr[i-1];
         const curr = arr[i];
-        const prev = arr[i-1]
-        const next = arr[i+1]
+        const next = arr[i+1];
         
-        if (curr > prev && next < curr) {
-            pivot = true
-        } else if (prev >= curr && next >= curr) {
-            return false
-        }
+        if (curr > prev && curr > next) 
+            pivot = true;
+        else if (prev >= curr && curr <= next) 
+            return false;
     }
-
-    return pivot
+    return pivot;
 };
