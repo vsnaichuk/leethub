@@ -1,33 +1,33 @@
 function evalRPN(tokens: string[]): number {
+    const n = tokens.length;
     const stack = [];
     
-    for (let t of tokens) {
+    for (let i = 0; i < n; i++) {
+        const t = tokens[i];
         switch (t) {
             case "+": {
-                stack.push((stack.pop() + stack.pop()))
+                stack.push(stack.pop() + stack.pop())
                 break;
             }
             case "-": {
-                const a = stack.pop();
                 const b = stack.pop();
-                stack.push(b - a)
+                const a = stack.pop();
+                stack.push(a - b)
                 break;
             }
             case "*": {
-                stack.push((stack.pop() * stack.pop()))
+                stack.push(stack.pop() * stack.pop())
                 break;
             }
             case "/": {
-                const a = stack.pop();
                 const b = stack.pop();
-                stack.push(Math.trunc(b / a))
+                const a = stack.pop();
+                stack.push(Math.trunc(a / b))
                 break;
             }
-            default: {
+            default:
                 stack.push(Number(t))
-            }                
         }
     }
-    
     return stack[0]
 };
