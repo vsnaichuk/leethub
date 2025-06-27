@@ -1,18 +1,18 @@
 function search(nums: number[], target: number): number {
-    const n = nums.length;
-    
-    let lo = 0, hi = n - 1;
+    let lo = 0;
+    let hi = nums.length - 1;
+
     while (lo <= hi) {
-        const mid = Math.floor(lo + (hi - lo) / 2);
-        const midVal = nums[mid];
-        
-        if (midVal === target) {
+        const mid = Math.floor(lo + (hi - lo) / 2)
+        const val = nums[mid];
+        if (target === val) {
             return mid;
-        } else if (midVal > target) {
-            hi = mid - 1;
+        } else if (target > val) {
+            lo = mid + 1;
         } else {
-            lo = mid + 1
+            hi = mid - 1
         }
     }
-    return -1;
+
+    return -1
 };
