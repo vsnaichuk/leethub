@@ -3,16 +3,17 @@ function search(nums: number[], target: number): number {
     let hi = nums.length - 1;
 
     while (lo <= hi) {
-        const mid = Math.floor(lo + (hi - lo) / 2)
+        const mid = Math.floor(lo + (hi - lo) / 2);
         const val = nums[mid];
-        if (target === val) {
+        
+        if (val === target) {
             return mid;
-        } else if (target > val) {
+        } else if (val < target) {
             lo = mid + 1;
         } else {
-            hi = mid - 1
+            hi = mid - 1;
         }
     }
 
-    return -1
+    return -1;
 };
